@@ -4,10 +4,10 @@ class dice {
   }
 
   roll() {
-    return dice.getRandomInt(1, this.getNumberOfSides());
+    return dice.getRandomInt(this.getNumberOfSides());
   }
 
-  static getRandomInt(min, max) {
-    return Math.floor(Math.random() * (max - min)) + min;
+  static getRandomInt(max) {
+    return Math.floor(Math.random() * max) + 1;
   }
 }

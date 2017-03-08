@@ -1,15 +1,7 @@
-class player {
+class player extends creature{
   constructor() {
-    this.health = this.maxHealth = requestRoll();
-    this.level = 1;
-    this.weapon = requestWeapon();
-  }
-
-  takeDamange(damageAmount) {
-    this.health -= damageAmount;
-    if (this.health < 1) {
-      requestGameOver();
-    }
+    super();
+    this.type = "player";
   }
 
   levelUp() {
