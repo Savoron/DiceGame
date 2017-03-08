@@ -12,12 +12,21 @@ body{font-family: "Orc Horde BB", Fallback, sans-serif;}
 }
 
 .player{
-  height:128px;
-  width:64px;
-  border:1px solid red;
+  height:256px;
+  width:128px;
+  background:blue;
   position:absolute;
   bottom:304px;
   left:64px;
+}
+
+.enemy{
+  height:256px;
+  width:128px;
+  background:red;
+  position:absolute;
+  bottom:304px;
+  right:64px;
 }
 
 .ground{
