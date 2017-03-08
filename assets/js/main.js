@@ -1,16 +1,21 @@
-var dice = {};
+function requestRoll() {
+	var possibleSidedDice = [4,6,8,10,12,20];
+	var indexOfNewRadomDice = new dice(possibleSidedDice.length).roll();
+	var randomDice = new dice(possibleSidedDice[indexOfNewRadomDice-1]).roll();
+	console.log("Dice selected: " + possibleSidedDice[indexOfNewRadomDice-1] + " | Roll was: " + randomDice);
+	return randomDice;
+}
 
-function createDice() {
-	dice.four = new die(4);
-	dice.six = new die(6);
-	dice.eight = new die(8);
-	dice.ten = new die(10);
-	dice.twelve = new die(12);
-	dice.twenty = new die(20);
+function requestGameOver() {
+	console.log("You have died.");
+}
+
+function requestWeapon() {
+	return new weapon();
 }
 
 function main() {
-	createDice();
+	var bob = new player();
 }
 
 main();

@@ -1,14 +1,10 @@
-class die {
+class dice {
   constructor(numberOfSides) {
     this.getNumberOfSides = function() {return numberOfSides;};
   }
 
   roll() {
-    return die.getRandomInt(0, this.getNumberOfSides());
-  }
-
-  get numberOfSides() {
-
+    return dice.getRandomInt(1, this.getNumberOfSides());
   }
 
   static getRandomInt(min, max) {
