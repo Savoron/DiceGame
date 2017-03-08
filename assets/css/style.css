@@ -8,18 +8,33 @@ body{font-family: "Orc Horde BB", Fallback, sans-serif;}
 
 .gameBoard{
   height:100vh;
-  background:#00aaff;
+  background:#7EC0EE;
+}
+
+.ground{
+  width:100%;
+  height:64px;
+  position:absolute;
+  bottom:240px;
+  background-image:url("../images/grass.png");
+  background-repeat:repeat-x;
+  background-size:64px 64px;
 }
 
 .output-container{
   position:absolute;
   bottom:0;
   width:100%;
+  background-image:url("../images/dirt.png");
+  background-repeat:repeat;
+  background-size:64px 64px;
 }
 
 .output{
+  font-size:2em;
+  color:#3e8128;
   padding:20px;
   height:200px;
-  background:#00ff00;
-  overflow-y: scroll;
 }
+
+.output-textarea{overflow-y:scroll;height:100%;}
