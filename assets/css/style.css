@@ -16,8 +16,12 @@ body{font-family: monospace;}/*font-family:"Orc Horde BB", Fallback, sans-serif;
       .mainMenu-content-home ul li:hover{background:#00ff00;cursor:pointer;}
       .mainMenu-content-characterSelect{display:none;}
 
+.gameover{display:none;height:100vh;width:100%;position:absolute;z-index:1001;background:#000;color:#ff0000;}
+.gameover h1{font-size:10vw;text-align:center;}
+.gameover h2{font-size:5vw;text-align:center;}
+
 .gameBoard{height:100vh;background:#7EC0EE;}
-.creaturesBoard{max-width:1000px;height:100%;position:relative;margin:auto;}
+.creaturesBoard{max0width:1000px;height:100%;position:relative;margin:auto;}
 
 .actionMenu{display:flex;height:100%;max-width:1000px;margin:auto;}
   .actionMenu-item{flex-grow:1;padding:20px;padding-bottom:0;}

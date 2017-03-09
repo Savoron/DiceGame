@@ -45,7 +45,7 @@ function requestEnemyDeath() {
 	document.getElementById("enemy").remove();
 }
 function requestGameOver() {
-	console.log("You have died.");
+	document.getElementById("gameover").style.display = "block";
 }
 function requestRoll() {
 	var possibleSidedDice = [4,6,8,10,12,20];
