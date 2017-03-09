@@ -7,16 +7,32 @@ function requestCharacterSelectMenu() {
 	requestStartGame();
 }
 function requestCharacter(e) {
-
+	console.log("I'm getting to this -___-");
 }
 function requestDeath(creature) {
 	if (creature.type == "player") {
 		requestGameOver();
 	} else if (creature.type == "enemy"){
-		console.log("Killed enemy");
+		requestEnemyDeath();
 	} else {
 		console.log("How? What? WTF DID YOU DO!?");
 	}
+}
+function requestDisableButton(button) {
+	document.getElementById(button).disabled = true;
+}
+function requestEnableButton(button) {
+	document.getElementById(button).disabled = false;
+}
+function requestEnemy() {
+	var roll = requestRoll();
+	var findEnemy = requestRoll();
+	if (findEnemy > roll) {
+		requestSpawnEnemy();
+	}
+}
+function requestEnemyDeath() {
+	document.getElementById("enemy").remove();
 }
 function requestGameOver() {
 	console.log("You have died.");
@@ -34,6 +50,19 @@ function requestMainMenu() {
 function requestMobileWarning() {
 	document.getElementById("mobileWarning").style.display = "block";
 }
+function requestSearch() {
+	
+}
+function requestSpawnEnemy() {
+	var newEnemy = new enemy();
+	var newEnemyDiv = document.createElement("div");
+			newEnemyDiv.id = "enemy";
+			newEnemyDiv.className = "enemy";
+	document.getElementById("creatureBoard").appendChild(newEnemyDiv);
+	requestDisableButton("btnMoveOn");
+	requestEnableButton("btnAttack");
+	requestEnableButton("btnRunAway");
+}
 function requestStartGame() {
 	var p = new player();
 	var output = document.getElementById("output");
@@ -49,6 +78,7 @@ function requestStartGame() {
 										 "<br>Search - Searching is only aviable when you're not in combat. When you search you might find a something. Who knows." +
 										 "<br>Move On - Move on will progress you through the game. Basically move you to the next enemy." +
 										 "<br><br>Well that's the basics of the game. You have a weapon and the only button you can click is Move On. So go forth and get lucky or die!";
+  document.getElementById("btnMoveOn").disabled = false;
 }
 function requestWeapon() {
 	return new weapon();
@@ -69,7 +99,9 @@ function main() {
 
 //EventListeners
 document.getElementById("btnMainMenu-StartGame").addEventListener("click", requestCharacterSelectMenu);
-
+document.getElementById("btnMoveOn").addEventListener("click", requestEnemy);
+document.getElementById("btnAttack").addEventListener("click", requestAttack;
+document.getElementById("btnRunAway").addEventListener("click", requestSearch);
 
 //Credit for this goes to http://detectmobilebrowsers.com/
 //and http://stackoverflow.com/questions/11381673/detecting-a-mobile-browser
