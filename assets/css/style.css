@@ -17,8 +17,9 @@ body{font-family: monospace;}/*font-family:"Orc Horde BB", Fallback, sans-serif;
       .mainMenu-content-characterSelect{display:none;}
 
 .gameBoard{height:100vh;background:#7EC0EE;}
+.creaturesBoard{width:1000px;height:100%;position:relative;margin:auto;}
 
-.actionMenu{display:flex;height:100%;}
+.actionMenu{display:flex;height:100%;max-width:1000px;margin:auto;}
   .actionMenu-item{flex-grow:1;padding:20px;padding-bottom:0;}
   .actionMenu-item button{width:100%;height:100%;background:rgba(0,0,0,0.25);border:none;font-family:"Orc Horde BB", Fallback, sans-serif;color:#fff;font-size:1.5em;}
   .actionMenu-item button:focus{outline:none;}
@@ -30,7 +31,7 @@ body{font-family: monospace;}/*font-family:"Orc Horde BB", Fallback, sans-serif;
 .ground{width:100%;height:64px;position:absolute;bottom:240px;background-image:url("../images/grass.png");background-repeat:repeat-x;background-size:64px 64px;}
 
 .output{position:absolute;bottom:0;width:100%;background-image:url("../images/dirt.png");background-repeat:repeat;background-size:64px 64px;}
-  .output-content{font-size:1.5em;color:#bbb;padding:20px;height:200px;}
+  .output-content{font-size:1.5em;color:#bbb;padding:20px;height:200px;max-width:1000px;margin:auto;}
     .output-textarea{overflow-y:scroll;height:100%;background:rgba(0,0,0,0.25);border:4px ridge #5d3e1d;}
 
 ::-webkit-scrollbar {width: 0.75em;}
