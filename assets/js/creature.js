@@ -1,3 +1,4 @@
+"use strict";
 class creature {
   constructor() {
     this.healthMultiplier = 10;

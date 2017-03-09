@@ -1,3 +1,4 @@
+"use strict";
 class player extends creature{
   constructor() {
     super();

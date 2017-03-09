@@ -1,3 +1,4 @@
+"use strict";
 class dice {
   constructor(numberOfSides) {
     this.getNumberOfSides = function() {return numberOfSides;};

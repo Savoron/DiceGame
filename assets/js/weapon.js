@@ -1,3 +1,4 @@
+"use strict";
 class weapon {
   constructor() {
     this.baseDamage = requestRoll();
