@@ -4,20 +4,24 @@
 body{font-family:"Orc Horde BB", Fallback, sans-serif;}
 
 .mobileWarning{display:none;padding:20px;background:rgba(0,0,0,0.8);border:4px dashed red;color:#fff;font-size:1.5em;z-index:1000;position:absolute;width:50%;margin-left:calc(50% - 25%);margin-top:100px;}
-.mobileWarning-content{}
-.mobileWarning-content button{margin-top:20px;width:100%;height:40px;}
+  .mobileWarning-content{}
+  .mobileWarning-content button{margin-top:20px;width:100%;height:40px;}
 
-.mainMenu{display:none;}
-.mainMenu-container{}
-.mainMenu-content{}
+.mainMenu{display:block;height:100vh;width:100%;position:absolute;z-index:1000;background-image:url("../images/dirt.png");background-repeat:repeat;background-size:64px 64px;}
+  .mainMenu-container{width:35%;background:#fff;position:relative;margin:auto;top:10%;}
+    .mainMenu-content{padding:10px;}
+    .mainMenu-content h1{font-size:4vw;text-align:center;}
+    .mainMenu-content ul{list-style:none;}
+    .mainMenu-content ul li{text-align:center;margin:10px;padding:5px;font-size:2.5vw;background:#aaff00;}
+    .mainMenu-content ul li:hover{background:#00ff00;cursor:pointer;}
 
 .gameBoard{height:100vh;background:#7EC0EE;}
 
 .actionMenu{display:flex;height:100%;}
-.actionMenu-item{flex-grow:1;padding:20px;padding-bottom:0;}
-.actionMenu-item button{width:100%;height:100%;background:rgba(0,0,0,0.25);border:none;font-family:"Orc Horde BB", Fallback, sans-serif;color:#fff;font-size:1.5em;}
-.actionMenu-item button:focus{outline:none;}
-.actionMenu-item button:hover{cursor:pointer;background:rgba(0,0,0,0.5);}
+  .actionMenu-item{flex-grow:1;padding:20px;padding-bottom:0;}
+  .actionMenu-item button{width:100%;height:100%;background:rgba(0,0,0,0.25);border:none;font-family:"Orc Horde BB", Fallback, sans-serif;color:#fff;font-size:1.5em;}
+  .actionMenu-item button:focus{outline:none;}
+  .actionMenu-item button:hover{cursor:pointer;background:rgba(0,0,0,0.5);}
 
 .player{height:256px;width:128px;background:blue;position:absolute;bottom:304px;left:64px;}
 .enemy{height:256px;width:128px;background:red;position:absolute;bottom:304px;right:64px;}
@@ -25,8 +29,8 @@ body{font-family:"Orc Horde BB", Fallback, sans-serif;}
 .ground{width:100%;height:64px;position:absolute;bottom:240px;background-image:url("../images/grass.png");background-repeat:repeat-x;background-size:64px 64px;}
 
 .output{position:absolute;bottom:0;width:100%;background-image:url("../images/dirt.png");background-repeat:repeat;background-size:64px 64px;}
-.output-content{font-size:1.5em;color:#3e8128;padding:20px;height:200px;}
-.output-textarea{overflow-y:scroll;height:100%;background:rgba(0,0,0,0.25);border:4px ridge #5d3e1d;}
+  .output-content{font-size:1.5em;color:#3e8128;padding:20px;height:200px;}
+    .output-textarea{overflow-y:scroll;height:100%;background:rgba(0,0,0,0.25);border:4px ridge #5d3e1d;}
 
 ::-webkit-scrollbar {width: 0.75em;}
 ::-webkit-scrollbar-track {background:rgba(0,0,0,.25);}
