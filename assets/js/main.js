@@ -5,19 +5,15 @@ function requestRoll() {
 	console.log("Dice selected: " + possibleSidedDice[indexOfNewRadomDice] + " | Roll was: " + randomDice);
 	return randomDice;
 }
-
 function requestGameOver() {
 	console.log("You have died.");
 }
-
 function requestWeapon() {
 	return new weapon();
 }
-
 function requestWeaponBreak() {
 	console.log("Your weapon has broken");
 }
-
 function requestDeath(creature) {
 	if (creature.type == "player") {
 		requestGameOver();
@@ -27,26 +23,25 @@ function requestDeath(creature) {
 		console.log("How? What? WTF DID YOU DO!?");
 	}
 }
-
 function requestAttack(creatureA, creatureB) {
 	creatureB.takeDamage(creatureA.attack());
 }
-
 function requestMobileWarning() {
 	document.getElementById("mobileWarning").style.display = "block";
 }
+function requestMainMenu() {
+	//document.
+}
 
 function main() {
+	var hold = false;
 	if (mobilecheck()) {
 		requestMobileWarning();
 	}
+	if (!hold) {
+		requestMainMenu();
+	}
 }
-
-var bob = new player();
-var derp = new enemy();
-
-console.log(bob);
-console.log(derp);
 
 //Credit for this goes to http://detectmobilebrowsers.com/
 //and http://stackoverflow.com/questions/11381673/detecting-a-mobile-browser
