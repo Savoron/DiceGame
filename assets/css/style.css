@@ -21,7 +21,7 @@ body{font-family: monospace;}/*font-family:"Orc Horde BB", Fallback, sans-serif;
 .gameover h2{font-size:5vw;text-align:center;}
 
 .gameBoard{height:100vh;background:#7EC0EE;}
-.creaturesBoard{max0width:1000px;height:100%;position:relative;margin:auto;}
+.creaturesBoard{max-width:1000px;height:100%;position:relative;margin:auto;}
 
 .actionMenu{display:flex;height:100%;max-width:1000px;margin:auto;}
   .actionMenu-item{flex-grow:1;padding:20px;padding-bottom:0;}

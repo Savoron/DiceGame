@@ -8,21 +8,41 @@ class creature {
     this.type = "creature";
   }
 
-  attack() {
+  calculateDamageAmount() {
     var damageMultiplier = requestRoll();
-    var damageDelt = this.weapon.baseDamage * damageMultiplier;
-    this.weapon.durability--;
-    if (this.weapon.durability == 0) {
-      requestWeaponBreak();
+    var damageDelt = this.getWeaponBaseDamage() * damageMultiplier;
+    this.weapon.weaponTakeDamage();
+
+    if (this.getWeaponDurability() == 0) {
+      damageDelt = -1;
     }
-    console.log(damageDelt);
     return damageDelt;
+  }
+
+  generateNewWeapon() {
+    this.weapon = requestWeapon();
+  }
+
+  getWeaponType() {
+    return this.weapon.getType();
+  }
+  getWeaponBaseDamage() {
+    return this.weapon.getBaseDamage();
+  }
+  getWeaponDurability() {
+    return this.weapon.getDurability();
+  }
+  getHealth() {
+    return this.health;
+  }
+  getLevel() {
+    return this.level;
+  }
+  getCreatureType() {
+    return this.type;
   }
 
   takeDamage(damageAmount) {
     this.health -= damageAmount;
-    if (this.health < 1) {
-      requestDeath(this);
-    }
   }
 }

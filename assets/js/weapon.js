@@ -6,6 +6,20 @@ class weapon {
     this.type = weapon.getWeapon();
   }
 
+  weaponTakeDamage() {
+    this.durability--;
+  }
+
+  getDurability() {
+    return this.durability;
+  }
+  getBaseDamage() {
+    return this.baseDamage;
+  }
+  getType() {
+    return this.type;
+  }
+
   static getWeapon() {
     var listOfWeapons = ["Isaac Newton's Apple",
                          "A Clown Fish With A Small Right Fin",
@@ -20,7 +34,6 @@ class weapon {
                          "Ferb's Aglet",
                          "Fargoth's Ring"];
     var randomNumber = new dice(listOfWeapons.length).roll()-1;
-    console.log(listOfWeapons[randomNumber]);
     return listOfWeapons[randomNumber];
   }
 }

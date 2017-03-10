@@ -1,12 +1,33 @@
 "use strict";
-function requestAttack(creatureA, creatureB) {
-	creatureB.takeDamage(creatureA.attack());
-	creatureA.takeDamage(creatureB.attack());
+function requestAttack(player, enemy) {
+	var playerDamage = player.calculateDamageAmount();
+	var enemyDamage = enemy.calculateDamageAmount();
+
+	if (playerDamage != -1) {
+		enemy.takeDamage(playerDamage);
+	} else {
+    requestWeaponBreak(player);
+	}
+
+	if (enemy.getHealth < 1) {
+		requestDeath(enemy);
+	} else {
+		if (enemyDamage != -1) {
+			player.takeDamage(enemyDamage);
+		} else {
+			requestEnemyRun(player);
+		}
+	}
+
+	if (player.getHealth < 1) {
+		requestDeath(player);
+	}
+
 }
-function requestCharacterSelectMenu() {
+function requestCharacterSelectMenu(player) {
 	document.getElementById("mainMenu").style.display = "none";
 	//document.getElementById("mainMenu-characterSelect").style.display = "block";
-	requestStartGame();
+	requestStartGame(player);
 }
 function requestCharacter(e) {
 	console.log("I'm getting to this -___-");
@@ -15,7 +36,7 @@ function requestDeath(creature) {
 	if (creature.type == "player") {
 		requestGameOver();
 	} else if (creature.type == "enemy"){
-		requestEnemyDeath();
+		requestEnemyDeath(player);
 	} else {
 		console.log("How? What? WTF DID YOU DO!?");
 	}
@@ -26,23 +47,33 @@ function requestDisableButton(button) {
 function requestEnableButton(button) {
 	document.getElementById(button).disabled = false;
 }
-function requestEnemy() {
+function requestEnemy(player) {
 	var roll = requestRoll();
-	var findEnemy = requestRoll();
+	var findEnemy = requestRoll(player);
 	if (findEnemy > roll) {
-		requestSpawnEnemy();
-		requestDialogue("enemy");
+		requestDialogue("enemy", player);
+		return requestSpawnEnemy();
 	} else {
-		requestDialogue("nothing");
+		requestDialogue("nothing", player);
 	}
 }
-function requestEnemyDeath() {
-	requestDialogue("killedenemy");
+function requestEnemyDeath(player) {
+	requestDialogue("killedenemy", player);
 	requestDisableButton("btnAttack");
 	requestDisableButton("btnRunAway");
 	requestEnableButton("btnSearch");
 	requestEnableButton("btnMoveOn");
 	document.getElementById("enemy").remove();
+}
+function requestEnemyRun(player, enemy) {
+	var roll = requestRoll();
+	var run = requestRoll();
+	if (run > roll) {
+		requestEnemyDeath(player);
+		requestDialogue("enemygotaway", player);
+	} else {
+		requestDialogue("enemytriedtorun", player);
+	}
 }
 function requestGameOver() {
 	document.getElementById("gameover").style.display = "block";
@@ -51,18 +82,17 @@ function requestRoll() {
 	var possibleSidedDice = [4,6,8,10,12,20];
 	var indexOfNewRadomDice = new dice(possibleSidedDice.length).roll()-1;
 	var randomDice = new dice(possibleSidedDice[indexOfNewRadomDice]).roll();
-	console.log("Dice selected: " + possibleSidedDice[indexOfNewRadomDice] + " | Roll was: " + randomDice);
 	return randomDice;
 }
-function requestRunAway() {
+function requestRunAway(player, enemy) {
 	var roll = requestRoll();
 	var run = requestRoll();
 	if (run > roll) {
-		requestEnemyDeath();
-		requestDialogue("runaway");
-	} else {
-		requestDialogue("failedrunaway");
-		window.player.takeDamage(window.enemy.attack());
+		requestEnemyDeath(player);
+		requestDialogue("runaway", player);
+	} else if (enemy.getWeaponDurability > 0){
+		requestDialogue("failedrunaway", player);
+		player.takeDamage(enemy.calculateDamageAmount());
 	}
 }
 function requestMainMenu() {
@@ -71,45 +101,48 @@ function requestMainMenu() {
 function requestMobileWarning() {
 	document.getElementById("mobileWarning").style.display = "block";
 }
-function requestSearch() {
-	var roll = requestRoll();
-	var findWeapon = requestRoll();
-	if (findWeapon > roll) {
-		window.player.weapon = new weapon();
-		requestDialogue("foundweapon");
+function requestSearch(player) {
+	if (player.getWeaponDurability() < 1) {
+		var roll = requestRoll();
+		var findWeapon = requestRoll();
+		if (findWeapon > roll) {
+			player.generateNewWeapon();
+			requestDialogue("foundweapon", player);
+		} else {
+			requestDialogue("foundnothing", player);
+		}
 	} else {
-		requestDialogue("foundnothing");
+		requestDialogue("durability", player)
 	}
 }
 function requestSpawnEnemy() {
-	window.enemy = new enemy();
-	var newEnemyDiv = document.createElement("div");
-			newEnemyDiv.id = "enemy";
-			newEnemyDiv.className = "enemy";
-	document.getElementById("creatureBoard").appendChild(newEnemyDiv);
+	var div = document.createElement("div");
+			div.id = "enemy";
+			div.className = "enemy";
+	document.getElementById("creatureBoard").appendChild(div);
 	requestDisableButton("btnMoveOn");
 	requestEnableButton("btnAttack");
 	requestEnableButton("btnRunAway");
 	requestDisableButton("btnSearch");
+	return new enemy();;
 }
 function requestSpawnPlayer() {
-	window.player = new player();
-	var newPlayerDiv = document.createElement("div");
-			newPlayerDiv.id = "player";
-			newPlayerDiv.className = "player";
-	document.getElementById("creatureBoard").appendChild(newPlayerDiv);
+	var div = document.createElement("div");
+			div.id = "player";
+			div.className = "player";
+	document.getElementById("creatureBoard").appendChild(div);
 	requestEnableButton("btnMoveOn");
-	return window.player;
+	return new player();
 }
-function requestStartGame() {
-	var p = requestSpawnPlayer();
+function requestStartGame(player) {
+	var p = player;
 	var output = document.getElementById("output");
 	output.innerHTML = "Hello Player, <br>You have just been randomly generated by two dice. One dice was a six sided dice that determind which of the other six, six sided dice were used to generate your stats. Yes, you have stats. Would you like to know what they are? Should I tell you? Hmm well I guess so. So here you go <3" +
 										 "<br><br>Your Stats:" +
-										 "<br>Max Health: " + p.maxHealth +
-										 "<br>Starting Weapon: " + p.weapon.type +
-										 "<br>Weapon's base damage: " + p.weapon.baseDamage + " (Your damage is calculated from your base damage amount)" +
-										 "<br>Weapon Durability: " + p.weapon.durability + " (Your weapon durability is the amount of uses it has before it will break)" +
+										 "<br>Max Health: " + p.getHealth() +
+										 "<br>Starting Weapon: " + p.getWeaponType() +
+										 "<br>Weapon's base damage: " + p.getWeaponBaseDamage() + " (Your damage is calculated from your base damage amount)" +
+										 "<br>Weapon Durability: " + p.getWeaponDurability() + " (Your weapon durability is the amount of uses it has before it will break)" +
 										 "<br><br>Now that you've look at your stats. Let me explain what those buttons do." +
 										 "<br>Attack - This button is used to attack an enemies you come across in your adventure." +
 										 "<br>Run Away - Do I need to explain this? Well you can run away when you're in a fight. Might be useful if you're weapon breaks." +
@@ -117,16 +150,16 @@ function requestStartGame() {
 										 "<br>Move On - Move on will progress you through the game. Basically move you to the next enemy." +
 										 "<br><br>Well that's the basics of the game. You have a weapon and the only button you can click is Move On. So go forth and get lucky or die!";
 }
-function requestStats() {
-	var stats = "Stats After Battle:<br>Health: " + window.player.health + "<br>Weapon Durability: " + window.player.weapon.durability;
+function requestStats(player) {
+	var stats = "Stats After Battle:<br>Health: " + player.getHealth() + "<br>Weapon Durability: " + player.getWeaponDurability();
 	return stats;
 }
 function requestWeapon() {
 	return new weapon();
 }
-function requestWeaponBreak() {
-	requestDialogue("weaponbreak");
-	requestDisableButton("btnAttack");
+function requestWeaponBreak(player) {
+	requestDialogue("weaponbreak", player);
+	requestDisableButton("btnAttack", player);
 }
 
 function main() {
@@ -136,14 +169,24 @@ function main() {
 	}
 	if (!hold) {
 		requestMainMenu();
+		core();
 	}
 }
 
-//EventListeners
-document.getElementById("btnMainMenu-StartGame").addEventListener("click", requestCharacterSelectMenu);
-document.getElementById("btnMoveOn").addEventListener("click", requestEnemy);
-document.getElementById("btnAttack").addEventListener("click", function(){requestAttack(window.player, window.enemy)}, false);
-document.getElementById("btnSearch").addEventListener("click", requestSearch);
+function core() {
+	var player = requestSpawnPlayer();
+	var enemy;
+
+	//Main Menu Buttons//
+	document.getElementById("btnMainMenu-ClickMe").addEventListener("click",   function(){ requestGameOver() });
+	document.getElementById("btnMainMenu-StartGame").addEventListener("click", function(){ requestCharacterSelectMenu(player)});
+
+	//Action Menu Buttons//
+	document.getElementById("btnAttack").addEventListener("click",  function(){ requestAttack(player, enemy) });
+	document.getElementById("btnRunAway").addEventListener("click", function(){ requestRunAway(player, enemy) });
+	document.getElementById("btnSearch").addEventListener("click",  function(){ requestSearch(player) });
+	document.getElementById("btnMoveOn").addEventListener("click",  function(){ enemy = requestEnemy(player) });
+}
 
 //Credit for this goes to http://detectmobilebrowsers.com/
 //and http://stackoverflow.com/questions/11381673/detecting-a-mobile-browser
