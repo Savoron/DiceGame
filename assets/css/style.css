@@ -7,13 +7,13 @@ body{font-family: monospace;}/*font-family:"Orc Horde BB", Fallback, sans-serif;
   .mobileWarning-content{}
   .mobileWarning-content button{margin-top:20px;width:100%;height:40px;}
 
-.mainMenu{display:none;height:100vh;width:100%;position:absolute;z-index:1000;background-image:url("../images/dirt.png");background-repeat:repeat;background-size:64px 64px;font-family:"Orc Horde BB", Fallback, sans-serif;}
-  .mainMenu-container{width:35%;background:#fff;position:relative;margin:auto;top:10%;}
+.mainMenu{display:none;height:100vh;width:100%;position:absolute;z-index:1000;font-family:"Orc Horde BB", Fallback, sans-serif;}
+  .mainMenu-container{width:35%;color:#eee;position:relative;margin:auto;top:10%;background:rgba(0,0,0,0.25);border:4px ridge #5d3e1d;}
     .mainMenu-content{padding:10px;}
     .mainMenu-content h1{font-size:3.5vw;text-align:center;}
       .mainMenu-content-home ul{list-style:none;}
-      .mainMenu-content-home ul li{text-align:center;margin:10px;padding:5px;font-size:2vw;background:#aaff00;}
-      .mainMenu-content-home ul li:hover{background:#00ff00;cursor:pointer;}
+      .mainMenu-content-home ul li{text-align:center;margin:10px;padding:5px;font-size:2vw;background:rgba(0,0,0,0.25);}
+      .mainMenu-content-home ul li:hover{background:rgba(0,0,0,0.5);cursor:pointer;}
       .mainMenu-content-characterSelect{display:none;}
 
 .gameover{display:none;height:100vh;width:100%;position:absolute;z-index:1001;background:#000;color:#ff0000;}
@@ -28,14 +28,14 @@ body{font-family: monospace;}/*font-family:"Orc Horde BB", Fallback, sans-serif;
   .actionMenu-item button{width:100%;height:100%;background-image:url("../images/button-background.png");background-size:44px;border:none;font-family:"Orc Horde BB", Fallback, sans-serif;color:#513414;font-size:1.5em;position:relative;}
   .actionMenu-item button:focus{outline:none;}
   .actionMenu-item button:hover{cursor:pointer;color:#5d3e1d;}
-  .actionMenu-item button:disabled{color:#aa6737;}
+  .actionMenu-item button:disabled{color:#aa6737;cursor:not-allowed;}
   .actionMenu-item button::before,
   .actionMenu-item button::after{content:"";position:absolute;top:0;width:17px;height:100%;}
   .actionMenu-item button::before{left:-17px;background-image:url("../images/button-bg-left.png");background-size:17px 44px;}
   .actionMenu-item button::after{right:-17px;background-image:url("../images/button-bg-right.png");background-size:17px 44px;}
 
-.player{height:256px;width:128px;background:blue;position:absolute;bottom:296px;left:64px;}
-.enemy{height:256px;width:128px;background:red;position:absolute;bottom:296px;right:64px;}
+.player{height:256px;width:128px;background:blue;position:absolute;bottom:296px;left:64px;background:url("../images/player01.png");}
+.enemy{height:256px;width:120px;background:red;position:absolute;bottom:296px;right:64px;background:url("../images/enemy01.png");}
 
 .ground{width:100%;height:64px;position:absolute;bottom:240px;background-image:url("../images/grass.png");background-repeat:repeat-x;background-size:64px 64px;}
 
