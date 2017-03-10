@@ -2,27 +2,32 @@
 function requestAttack(player, enemy) {
 	var playerDamage = player.calculateDamageAmount();
 	var enemyDamage = enemy.calculateDamageAmount();
+	var output = "";
 
 	if (playerDamage != -1) {
 		enemy.takeDamage(playerDamage);
+		output += "You dealt " + playerDamage + " damage to the enemy<br>";
 	} else {
     requestWeaponBreak(player);
 	}
 
-	if (enemy.getHealth < 1) {
-		requestDeath(enemy);
+	if (enemy.getHealth() < 1) {
+		requestDeath(enemy, player);
 	} else {
 		if (enemyDamage != -1) {
 			player.takeDamage(enemyDamage);
+			output += "Enemy dealt " + enemyDamage + " damage to you<br>";
 		} else {
 			requestEnemyRun(player);
 		}
 	}
 
-	if (player.getHealth < 1) {
-		requestDeath(player);
+	if (player.getHealth() < 1) {
+		requestDeath(player, player);
 	}
 
+	var op = document.getElementById("output");
+	op.innerHTML = output + "<br>" + op.innerHTML;
 }
 function requestCharacterSelectMenu(player) {
 	document.getElementById("mainMenu").style.display = "none";
@@ -32,7 +37,7 @@ function requestCharacterSelectMenu(player) {
 function requestCharacter(e) {
 	console.log("I'm getting to this -___-");
 }
-function requestDeath(creature) {
+function requestDeath(creature, player) {
 	if (creature.type == "player") {
 		requestGameOver();
 	} else if (creature.type == "enemy"){
@@ -90,9 +95,15 @@ function requestRunAway(player, enemy) {
 	if (run > roll) {
 		requestEnemyDeath(player);
 		requestDialogue("runaway", player);
-	} else if (enemy.getWeaponDurability > 0){
+	} else if (enemy.getWeaponDurability() > 0){
 		requestDialogue("failedrunaway", player);
 		player.takeDamage(enemy.calculateDamageAmount());
+		if (player.getHealth() < 1) {
+			requestDeath(player, player);
+		}
+	} else {
+		requestEnemyDeath(player);
+		requestDialogue("runaway", player);
 	}
 }
 function requestMainMenu() {

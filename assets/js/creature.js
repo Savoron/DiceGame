@@ -11,11 +11,13 @@ class creature {
   calculateDamageAmount() {
     var damageMultiplier = requestRoll();
     var damageDelt = this.getWeaponBaseDamage() * damageMultiplier;
-    this.weapon.weaponTakeDamage();
 
     if (this.getWeaponDurability() == 0) {
       damageDelt = -1;
+    } else {
+      this.weapon.weaponTakeDamage();
     }
+
     return damageDelt;
   }
 
@@ -44,5 +46,6 @@ class creature {
 
   takeDamage(damageAmount) {
     this.health -= damageAmount;
+    console.log(this.health + "/" + this.maxHealth);
   }
 }

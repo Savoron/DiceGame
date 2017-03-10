@@ -4,6 +4,7 @@ class weapon {
     this.baseDamage = requestRoll();
     this.durability = requestRoll();
     this.type = weapon.getWeapon();
+    console.log(this.type + " | " + this.baseDamage + " | " + this.durability);
   }
 
   weaponTakeDamage() {

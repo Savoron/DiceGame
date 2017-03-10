@@ -3,6 +3,7 @@ class player extends creature{
   constructor() {
     super();
     this.type = "player";
+    console.log(this.type + " | " + this.health);
   }
 
   levelUp() {
