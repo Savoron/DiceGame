@@ -10,7 +10,7 @@ Things I have planned
  - Defense added to player and enemy
  - UI redesign
 
- There's a lot that will be going on in this update. Hopefully I can get it done within the next week.
+There's a lot that will be going on in this update. Hopefully I can get it done within the next week.
 
 
 ##Release v1.0.0 - 4/12/17
